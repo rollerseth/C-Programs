@@ -1,0 +1,12 @@
+// Author: Seth Roller
+
+# include <stdio.h>
+
+int main() {
+
+  int n = atoi(argv[1]);
+
+  printf("hello")
+
+
+}

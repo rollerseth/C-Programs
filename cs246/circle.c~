@@ -1,0 +1,13 @@
+// Author: Seth Roller
+
+# include <stdio.h>
+
+int main(int agrc, char *argv[]) {
+
+  int n = atoi(argv[1]);
+
+  printf("Enter the radius of a circle: ");
+  
+
+
+}

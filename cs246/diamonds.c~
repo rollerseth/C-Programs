@@ -1,0 +1,70 @@
+// Author: Seth Roller
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "graphics.h"
+#include <math.h>
+#define SPACING 18
+#define MARGIN 20
+
+void draw_diamond(graphics_context gc, double x, double y, double size);
+
+void draw_window(graphics_context gc, int width, int height, void *data)
+{
+  int constraint;
+  int big;
+
+  if (height > width)
+  {
+    big = height;
+    constraint = width;
+  }
+  else
+  {
+    big = width;
+    constraint = height;
+  }
+  int middleH = height / 2;
+  int middleW = width / 2;
+  double startx = width * (0.25);
+  double starty = height * (0.25);
+
+  
+  for (int i = 0; i < 10; i++)
+    {
+      for (int j = 0; j < 10; j++)
+	{
+	  draw_diamond(gc,startx +
+		       (big / (SPACING))*j,
+		       starty + (constraint / (SPACING))*i
+		       , constraint / (40)); 
+	}
+      
+    }
+
+}
+
+int main(int argc, char *argv[])
+{
+  create_window(600, 600, NULL);
+  srand48(getpid());
+  
+}
+
+
+void draw_diamond(graphics_context gc, double x, double y, double size)
+{
+  new_path(gc);
+  move_to(gc,x,y-size);
+  line_to(gc,x-(size),y);
+  color(gc,1,0,0);
+  line_to(gc,x,y+size);
+  color(gc,drand48(),drand48(),drand48());
+  line_to(gc,x+size,y);
+  close_path(gc);
+  fill(gc);
+  
+}
+
+
+

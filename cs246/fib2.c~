@@ -1,0 +1,55 @@
+// Author: Seth Roller
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+
+long fib(int n);
+
+int main(int argc, char *argv[])
+{
+
+  if (argc != 2)
+  {
+    fprintf(stderr, "Usage: %s: %s: %s\n",
+	    argv[0],argv[1],strerror(errno));
+    exit(1);
+  }
+  
+  int number = atoi(argv[1]);
+  
+  for (int i = 1; i < number; i++)
+    printf("%ld\n", fib(i));
+  
+  
+}
+
+
+long fib(int n)
+{
+  static long a[100] = { -1 };
+  
+  if (a[0] == -1)
+  {
+    if (n == 0)
+    {
+      a[n + 1] = 0;
+      return a[n + 1];
+    }
+
+    else if (n == 1)
+    {
+      a[n + 1] = 1;
+      return  a[n + 1];
+    }
+    else
+    {
+      a[n + 1] = (a[n] + a[n - 1]);
+      return a[n + 1];
+    }
+    
+  }    
+  
+  
+}

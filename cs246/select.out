@@ -1,0 +1,18 @@
+Username:  rollers
+Date:      Mon Feb 12 12:37:08 EST 2018
+ 
+running ./select 1 5 < /homes/mathcs/courses/cs246/lines
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+running ./select 7 12 < /homes/mathcs/courses/cs246/lines
+Line 7
+Line 8
+Line 9
+Line 10
+Line 11
+Line 12
+running ./select 5 5 < /homes/mathcs/courses/cs246/lines
+Line 5

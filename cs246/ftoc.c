@@ -1,0 +1,21 @@
+// Author: Seth Roller
+
+# include <stdio.h>
+# include <math.h>
+
+int main(int argc, char *argv[]) {
+
+  double fahr;
+  double celc;
+  
+  printf("Enter a temperature in Fahrenheit: ");
+  scanf("%lf", &fahr);
+
+  celc = (5.0/9.0) * (fahr - 32);
+
+  printf("\n%1.1lf degrees Fahrenheit is ", fahr); 
+  printf("%1.1lf degrees Celcius.\n", celc); 
+
+  
+
+}

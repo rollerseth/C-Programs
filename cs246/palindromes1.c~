@@ -1,0 +1,61 @@
+// Author: Seth Roller
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <errno.h>
+#include <string.h>
+
+
+void reverse(char *s)
+{
+  char holder;
+  int length = strlen(s) - 1;
+  
+  for (int i = 0; i < strlen(s) / 2; i++)
+  {
+    holder = s[i];
+    s[i] = s[length];
+    s[length] = holder;
+    length--;
+  }
+}
+
+int ispalindrome(long n)
+{
+  char compare[256]; //calloc(n, sizeof(long));
+  char *send; //= malloc(n * sizeof(long));
+  
+  sprintf(compare, "%ld", n);
+
+  send = strdup(compare);
+  reverse(send);
+    
+  if (strcmp(compare, send) == 0)
+    return 1;
+  
+  else
+    return 0;
+
+}
+
+int main(int argc, char *argv[])
+{
+
+  if (argc != 2)
+  {
+    fprintf(stderr, "Usage Error: Need 1 command line argument.\n");
+    exit(1);
+  }
+  
+  long n = atol(argv[1]);
+  for (long i = 0; i <= n; i++)
+  {
+    long call = i * i;
+    int receive = ispalindrome(call);
+
+    if (receive == 1)
+      printf("%ld: %ld\n", i, i * i);
+  }
+
+}

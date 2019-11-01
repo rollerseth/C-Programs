@@ -1,0 +1,112 @@
+//Author: Seth Roller
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "graphics.h"
+#include <getopt.h>
+#include <ctype.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+
+struct coordinates {
+  int x;
+  int y;
+};
+
+struct parameters {
+  int steps;
+  int seed;
+  int redSteps;
+  int greenSteps;
+  int blueSteps;
+  int blueBack;
+  int redBack;
+  int greenBack;
+};
+  
+
+void draw_window(graphics_context gc, int width, int height, void *data)
+{
+  
+  struct parameters *opt = (struct parameters *) data;
+  
+  struct coordinates q;
+  q.x = 0;
+  q.y = 0;
+  
+  int newX = width/2;
+  int newY = height/2;
+  srand48(opt->seed);
+
+  new_path(gc);
+  rectangle(gc, 0.00, 0.00, width, height);
+  color(gc, opt->redBack, opt->greenBack, opt->blueBack);
+  fill(gc);
+  
+  for (int i = 0; i < opt->steps; i++)
+  {
+    
+    new_path(gc);
+    rectangle(gc, newX + q.x, newY + q.y, 1, 1);
+    color(gc,opt->redSteps,opt->greenSteps,opt->blueSteps);
+    fill(gc);
+
+    if (drand48() < 0.5) q.x++; else q.x--;
+    if (drand48() < 0.5) q.y++; else q.y--;
+  }
+
+}
+
+
+int main(int argc, char *argv[])
+{
+  struct parameters opt = { 0, 0, 0, 0, 0, 1, 1, 1 };
+  int option;
+  
+  while ((option = getopt(argc, argv, "s:S:b:B:G:g:r:R:")) != -1)
+  {
+    switch (option)
+    {
+    case 's':
+      opt.steps = atoi(optarg);
+      break;
+    case 'S':
+      opt.seed = atoi(optarg);
+      break;
+    case 'r':
+      opt.redSteps = atoi(optarg);
+      break;
+    case 'R':
+      opt.redBack = atoi(optarg);
+      break;
+    case 'g':
+      opt.greenSteps = atoi(optarg);
+      break;
+    case 'G':
+      opt.greenBack = atoi(optarg);
+      break;
+    case 'b':
+      opt.blueSteps = atoi(optarg);
+      break;
+    case 'B':
+      opt.blueBack = atoi(optarg);
+      break;
+    default:
+      fprintf(stderr,"Usage: %s [-s steps][-S seed][-r redSteps][-R redBack ]\n"
+	      , argv[0]);  
+      exit(1);
+      
+    }//end of switch
+    
+  }//end of while
+
+  
+  if (opt.steps == 0)
+    opt.steps = 10000;
+  if (opt.seed == 0)
+    opt.seed = getpid();
+  
+  
+  create_window(600,600,&opt);
+}
